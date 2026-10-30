@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  playwright-tests:
+    # Build the image from the current directory's Dockerfile
+    build: .
+    container_name: playwright-mariuspop-runner
+    
+    # Mount the local playwright-report directory to persist test reports outside the container
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      
+    # Pass environment variables into the container
+    environment:
+      - CI=true
