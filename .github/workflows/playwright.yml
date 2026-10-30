@@ -12,6 +12,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
       env:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+        HOME: /root
 
     steps:
       - name: Checkout repository
@@ -19,14 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Debug Playwright
-        run: |
-          echo "HOME=$HOME"
-          echo "PLAYWRIGHT_BROWSERS_PATH=$PLAYWRIGHT_BROWSERS_PATH"
-          npx playwright --version
-          node -p "require.resolve('playwright')"
-          ls -la /ms-playwright/
 
       - name: Run Playwright tests
         run: PLAYWRIGHT_BROWSERS_PATH=/ms-playwright npx playwright test
