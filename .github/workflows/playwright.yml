@@ -7,13 +7,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    # This tells GitHub Actions to run the entire job inside your built Docker container
-    container:
-      image: mcr.microsoft.com/playwright:v1.64.1-noble
-      options: --user root
-      env:
-        HOME: /root
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
