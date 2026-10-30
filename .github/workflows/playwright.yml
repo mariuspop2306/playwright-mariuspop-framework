@@ -1,4 +1,3 @@
-
 name: Playwright Tests in Docker
 
 on:
@@ -12,7 +11,6 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
       env:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
-        HOME: /root
 
     steps:
       - name: Checkout repository
@@ -24,9 +22,6 @@ jobs:
       - name: Run Playwright tests
         run: |
           export HOME=/root
-          echo "HOME=$HOME"
-          id
-          ls -ld "$HOME"
           npx playwright test
 
       - name: Upload test report
