@@ -14,4 +14,4 @@ jobs:
       - name: Build and run tests inside Docker container
         run: |
           docker build -t playwright-framework .
-          docker run --rm playwright-framework npx playwright test
+          docker run --rm -e PLAYWRIGHT_BROWSERS_PATH=/ms-playwright playwright-framework npx playwright test
