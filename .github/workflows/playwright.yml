@@ -16,6 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug Docker environment
+        run: |
+          echo "PLAYWRIGHT_BROWSERS_PATH=$PLAYWRIGHT_BROWSERS_PATH"
+          echo "HOME=$HOME"
+          echo "Installed Playwright version:"
+          npx playwright --version
+          echo "Browser directory:"
+          ls -la /ms-playwright/
+          echo "Chromium directory:"
+          ls -la /ms-playwright/chromium_headless_shell-1248/ || true
+          echo "WebKit directory:"
+          ls -la /ms-playwright/webkit-2370/ || true
+
       - name: Install dependencies
         run: npm ci
 
