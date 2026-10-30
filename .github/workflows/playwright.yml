@@ -22,7 +22,12 @@ jobs:
         run: npm ci
 
       - name: Run Playwright tests
-        run: PLAYWRIGHT_BROWSERS_PATH=/ms-playwright npx playwright test
+        run: |
+          export HOME=/root
+          echo "HOME=$HOME"
+          id
+          ls -ld "$HOME"
+          npx playwright test
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
