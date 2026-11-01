@@ -3,8 +3,16 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "paths": {
+      "@fixtures/*": ["./fixtures/*"],
+      "@page-objects/*": ["./page-objects/*"],
+      "@tests/*": ["./tests/*"]
+    },
     "types": ["node", "@playwright/test"],
     "strict": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "6.0"
+  },
+  "include": ["fixtures/**/*", "page-objects/**/*", "tests/**/*"]
 }

@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class ProductsPage {
   readonly page: Page;
@@ -24,5 +24,19 @@ export class ProductsPage {
 
   async goToCart() {
     await this.shoppingCartLink.click();
+  }
+
+  async getFirstProductName(): Promise<string> {
+    const text = await this.page.getByTestId('inventory-item-name').first().textContent();
+    return text ? text.trim() : '';
+  }
+
+  async getSecondProductName(): Promise<string> {
+    const text = await this.page.getByTestId('inventory-item-name').nth(1).textContent();
+    return text ? text.trim() : '';
+  }
+
+  async expectCartToBeEmpty(): Promise<void> {
+    await expect(this.shoppingCartLink).toHaveAttribute('aria-label', 'Cart, empty');
   }
 }

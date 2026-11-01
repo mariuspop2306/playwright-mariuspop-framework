@@ -1,27 +1,32 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../page-objects/LoginPage';
-import { ProductsPage } from '../../page-objects/ProductsPage';
+import { test, expect } from '@fixtures/testFixtures';
 
 test.describe('SauceDemo - Inventory Tests', () => {
-  let loginPage: LoginPage;
-  let productsPage: ProductsPage;
+  let firstProductName: string;
+  let secondProductName: string;
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    productsPage = new ProductsPage(page);
+  test.beforeEach(async ({ pm, authenticatedUser }) => {
+    const productsPage = pm.getProductsPage();
 
-    await loginPage.navigate();
-    await loginPage.login('standard_user', 'secret_sauce');
+    firstProductName = await productsPage.getFirstProductName();
+    secondProductName = await productsPage.getSecondProductName();
   });
 
-  test('Add single item to cart updates badge count', async () => {
-    await productsPage.addProductToCartByName('Sauce Labs Backpack');
+  test('Add single item to cart updates badge count', async ({ pm }) => {
+    const productsPage = pm.getProductsPage();
+
+    await productsPage.expectCartToBeEmpty();
+    await productsPage.addProductToCartByName(firstProductName);
+    
     await expect(productsPage.shoppingCartBadge).toHaveText('1');
   });
 
-  test('Add multiple items to cart', async () => {
-    await productsPage.addProductToCartByName('Sauce Labs Backpack');
-    await productsPage.addProductToCartByName('Sauce Labs Bike Light');
+  test('Add multiple items to cart', async ({ pm }) => {
+    const productsPage = pm.getProductsPage();
+
+    await productsPage.expectCartToBeEmpty();
+    await productsPage.addProductToCartByName(firstProductName);
+    await productsPage.addProductToCartByName(secondProductName);
+    
     await expect(productsPage.shoppingCartBadge).toHaveText('2');
   });
 });
