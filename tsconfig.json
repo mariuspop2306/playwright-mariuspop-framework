@@ -4,15 +4,29 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
-      "@fixtures/*": ["./fixtures/*"],
-      "@page-objects/*": ["./page-objects/*"],
-      "@tests/*": ["./tests/*"]
+      "@fixtures/*": [
+        "./fixtures/*"
+      ],
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "@tests/*": [
+        "./tests/*"
+      ]
     },
-    "types": ["node", "@playwright/test"],
+    "types": [
+      "node",
+      "@playwright/test"
+    ],
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["fixtures/**/*", "page-objects/**/*", "tests/**/*"]
+  "include": [
+    "playwright.config.ts",
+    "fixtures/**/*",
+    "page-objects/**/*",
+    "tests/**/*"
+  ]
 }

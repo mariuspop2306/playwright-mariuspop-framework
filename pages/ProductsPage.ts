@@ -26,13 +26,8 @@ export class ProductsPage {
     await this.shoppingCartLink.click();
   }
 
-  async getFirstProductName(): Promise<string> {
-    const text = await this.page.getByTestId('inventory-item-name').first().textContent();
-    return text ? text.trim() : '';
-  }
-
-  async getSecondProductName(): Promise<string> {
-    const text = await this.page.getByTestId('inventory-item-name').nth(1).textContent();
+  async getProductNameByIndex(index: number): Promise<string> {
+    const text = await this.page.getByTestId('inventory-item-name').nth(index).textContent();
     return text ? text.trim() : '';
   }
 

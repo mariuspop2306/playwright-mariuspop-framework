@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { PageManager } from '@page-objects/PageManager';
+import { PageManager } from '@pages/PageManager';
 
 type MyFixtures = {
   pm: PageManager;
